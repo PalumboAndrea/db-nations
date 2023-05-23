@@ -25,15 +25,15 @@ public static void main(String[] args) throws Exception {
 					+ " ON countries.region_id  = regions.region_id "
 					+ " JOIN continents "
 					+ " ON regions.continent_id = continents.continent_id "
-					+ " WHERE countries.name LIKE '%ita%'"
+					+ " WHERE countries.name LIKE ?"
 					+ " ORDER BY countries.name ASC ";
 			
-//			System.out.println("Esegui una ricerca:");
-//			String userSearch = sc.nextLine();
+			System.out.println("Esegui una ricerca:");
+			String userSearch = sc.nextLine();
 			
 			try (PreparedStatement ps = con.prepareStatement(sql)) {
 				
-//				ps.setString(1, userSearch);
+				ps.setString(1, "%" + userSearch + "%");
 				
 				try (ResultSet rs = ps.executeQuery()) {
 					
@@ -49,7 +49,7 @@ public static void main(String[] args) throws Exception {
 								+ area + " - " + regionName + " - " + continentName);
 						
 					}
-						System.out.println("Seleziona un ID tra quelli proposti");
+						System.out.println("\nSeleziona un ID tra quelli proposti sopra");
 						int userSearchId = sc.nextInt();
 						sc.nextLine();
 					
